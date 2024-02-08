@@ -1,8 +1,9 @@
-import { Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
 import { PaymentService } from './payment.service';
 import { config } from 'src/configurations/config/envs';
 import { PaymentResponseDTO } from './DTO/output/paymentGetDTO';
+import { PaymentPSEPostDTO } from './DTO/input';
 interface interfaceToken {
   token: string
 }
@@ -29,8 +30,8 @@ export class PaymentController {
     summary: 'Endpoint to get token and seting to memory app',
     description: `Endpoint to get token epayco and set into memory using credentials internal the app`,
   })
- async getPaymentToken(): Promise<string> {
-      const data = await this.paymentService.generatePayment()
+ async generatePaymentTest(): Promise<string> {
+      const data = await this.paymentService.generatePaymentTest()
       return data
   };
 
@@ -69,8 +70,11 @@ export class PaymentController {
           },
     }
   })
- async epaycoTransactionPSE(): Promise<any | null> {
-      const data = await this.paymentService.generatePayment()
-      return data
+  @ApiOperation({
+    summary: 'Endpoint to send information to create transaction',
+    description: `Endpoint to send information to create transaction with epayco paymentGateway`,
+  })
+ async generatePaymentData(@Body() data: PaymentPSEPostDTO): Promise<PaymentPSEPostDTO> {
+      return await this.paymentService.generatePaymentData(data)
   };
 };
