@@ -1,9 +1,10 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query} from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
 import { PaymentService } from './payment.service';
 import { config } from 'src/configurations/config/envs';
 import { PaymentResponseDTO } from './DTO/output/paymentGetDTO';
 import { PaymentPSEPostDTO } from './DTO/input';
+import { IQueryParamStartProcess } from './interfaces';
 interface interfaceToken {
   token: string
 }
@@ -36,7 +37,7 @@ export class PaymentController {
   };
 
 
-  @Post('payments/pse')
+  @Post('payments/process')
   @ApiOkResponse({
     status: HttpStatus.CREATED,
     schema: {
@@ -48,6 +49,7 @@ export class PaymentController {
           },
     }
   })
+  @ApiQuery({ name: 'typeOriginTransaction', required: true, type: String, description: 'Type transaction data to send' })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     schema: {
@@ -74,7 +76,8 @@ export class PaymentController {
     summary: 'Endpoint to send information to create transaction',
     description: `Endpoint to send information to create transaction with epayco paymentGateway`,
   })
- async generatePaymentData(@Body() data: PaymentPSEPostDTO): Promise<PaymentPSEPostDTO> {
-      return await this.paymentService.generatePaymentData(data)
+ async generatePaymentData(@Body() data: PaymentPSEPostDTO, @Query() dataQuery: IQueryParamStartProcess): Promise<PaymentPSEPostDTO> {
+    const dataResponse = await this.paymentService.generatePaymentData(data, dataQuery.typeOriginTransaction)
+    return dataResponse;
   };
 };

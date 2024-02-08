@@ -15,6 +15,7 @@ export interface IFormatExceptionMessage {
   statusCode?: number;
   message?: string;
   error?: boolean;
+  details?: string[]
 }
 
 export class ExceptionsService {
