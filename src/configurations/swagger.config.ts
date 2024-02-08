@@ -1,7 +1,7 @@
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as auth from "express-basic-auth";
 import { config as configEnv } from "../configurations/config/envs";
-import { PaymentGetDTO } from "src/modules/payments/DTO/output/paymentGetDTO";
+import { PaymentResponseDTO } from "src/modules/payments/DTO/output/paymentGetDTO";
 
 export const configSwagger = async (app:any) => {
 
@@ -27,7 +27,7 @@ export const configSwagger = async (app:any) => {
         .build();
 
     const document = SwaggerModule.createDocument(app, config, {
-      extraModels: [PaymentGetDTO]
+      extraModels: [PaymentResponseDTO]
     });
   
     return SwaggerModule.setup(`/${configEnv.url_selft_api}/docs`, app, document, {

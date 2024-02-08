@@ -29,7 +29,7 @@ export class PaymentController {
     summary: 'Endpoint to get token and seting to memory app',
     description: `Endpoint to get token epayco and set into memory using credentials internal the app`,
   })
- async getStat(): Promise<string> {
+ async getPaymentToken(): Promise<string> {
       const data = await this.paymentService.generatePayment()
       return data
   };
@@ -69,7 +69,7 @@ export class PaymentController {
           },
     }
   })
- async epaycoTransaction(): Promise<any | null> {
+ async epaycoTransactionPSE(): Promise<any | null> {
       const data = await this.paymentService.generatePayment()
       return data
   };
