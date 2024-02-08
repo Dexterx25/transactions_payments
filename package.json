@@ -44,6 +44,7 @@
         "express-basic-auth": "^1.2.1",
         "joi": "^17.10.2",
         "mongoose": "^6.8.3",
+        "newrelic": "^11.10.3",
         "passport": "^0.6.0",
         "passport-http": "^0.3.0",
         "passport-jwt": "^4.0.1",
