@@ -1,7 +1,7 @@
 import {
     ApiProperty,
   } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
   
  
 export enum method_exc {
@@ -225,4 +225,12 @@ export enum method_exc {
       description: 'extra1 customer that wanna make transaction'
     })
     extra1!: number
+  }
+
+
+  export class QueryDtoPayment {
+    @IsNotEmpty()
+    @IsNumber()
+    typeOriginTransaction!: string;
+
   }

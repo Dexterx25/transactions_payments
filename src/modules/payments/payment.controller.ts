@@ -3,8 +3,7 @@ import { ApiOkResponse, ApiOperation, ApiQuery, ApiResponse, ApiTags, getSchemaP
 import { PaymentService } from './payment.service';
 import { config } from 'src/configurations/config/envs';
 import { PaymentResponseDTO } from './DTO/output/paymentGetDTO';
-import { PaymentPSEPostDTO } from './DTO/input';
-import { IQueryParamStartProcess } from './interfaces';
+import { PaymentPSEPostDTO, QueryDtoPayment } from './DTO/input';
 interface interfaceToken {
   token: string
 }
@@ -76,7 +75,7 @@ export class PaymentController {
     summary: 'Endpoint to send information to create transaction',
     description: `Endpoint to send information to create transaction with epayco paymentGateway`,
   })
- async generatePaymentData(@Body() data: PaymentPSEPostDTO, @Query() dataQuery: IQueryParamStartProcess): Promise<PaymentPSEPostDTO> {
+ async generatePaymentData(@Body() data: PaymentPSEPostDTO, @Query() dataQuery: QueryDtoPayment): Promise<PaymentPSEPostDTO> {
     const dataResponse = await this.paymentService.generatePaymentData(data, dataQuery.typeOriginTransaction)
     return dataResponse;
   };
