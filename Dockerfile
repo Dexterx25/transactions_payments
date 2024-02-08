@@ -13,15 +13,13 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-COPY .env .env.development ./
-
-# Set NODE_ENV environment variable
-ENV NODE_ENV dev
-
-RUN npm ci --only=production && npm cache clean --force
+COPY .env .env
 
 # Expose the port that the app runs on
 EXPOSE 3000
 
 # Command to run the application
 CMD ["npm", "run", "start:dev"]
+
+# docker run -p 3000:3000 
+# docker-compose up
