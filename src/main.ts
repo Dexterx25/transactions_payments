@@ -15,7 +15,7 @@ import { ResponseInterceptor } from "./configurations/interceptors/response";
 import { config } from "./configurations/config/envs";
 
 async function bootstrap() {
-
+  
   const logger = new LoggerService();
 
   const paths = { public: "", views: "" };
