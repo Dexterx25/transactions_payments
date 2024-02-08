@@ -12,8 +12,10 @@ import {
 import { LoggerService } from "./utils/logger";
 import { LoggingInterceptor, TimeoutInterceptor } from "./configurations/interceptors";
 import { ResponseInterceptor } from "./configurations/interceptors/response";
+import { config } from "./configurations/config/envs";
 
 async function bootstrap() {
+
   const logger = new LoggerService();
 
   const paths = { public: "", views: "" };
@@ -40,12 +42,11 @@ async function bootstrap() {
     new TimeoutInterceptor(),
   );
    await configSwagger(app)
-
   await app.listen(3000, () => {
-    logger.log('APP', `testApp is running on http://localhost:${3000}`);
+    logger.log('APP', `${config.name_app} is running on http://localhost:${3000}`);
     logger.debug(
       'APP',
-      `Swagger is running on http://localhost:${3000}/api/v1/testApp/docs`,
+      `Swagger is running on http://localhost:${3000}/${config.url_selft_api}/docs`,
     );
   });
 }
