@@ -18,7 +18,6 @@ export class LoggingInterceptor implements NestInterceptor {
     const request = httpContext.getRequest();
 
     const ip = this.getIP(request);
-
     this.logger.log(
       `Incoming Request on ${request.path}`,
       `method=${request.method} ip=${ip}`,

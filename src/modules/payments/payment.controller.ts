@@ -76,6 +76,7 @@ export class PaymentController {
     description: `Endpoint to send information to create transaction with epayco paymentGateway`,
   })
  async generatePaymentData(@Body() data: PaymentPSEPostDTO, @Query() dataQuery: QueryDtoPayment): Promise<PaymentPSEPostDTO> {
+   console.log('okkkkkkkkkkkkkkkkkkkkkkk')
     const dataResponse = await this.paymentService.generatePaymentData(data, dataQuery.typeOriginTransaction)
     return dataResponse;
   };

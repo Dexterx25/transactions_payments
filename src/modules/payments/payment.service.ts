@@ -12,8 +12,8 @@ export class PaymentService {
     return Promise.resolve('ok')
   }
 
-  public async generatePaymentData(data: PaymentPSEPostDTO, object: string): Promise<any>{
-    const dataReturn = await this.epaycoPaymentGatewayApify.processPayment(data, object) 
+  public async generatePaymentData(data: PaymentPSEPostDTO, id: string): Promise<any>{
+    const dataReturn = await this.epaycoPaymentGatewayApify.processPayment(data, id) 
     return dataReturn;
   }
     

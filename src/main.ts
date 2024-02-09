@@ -13,9 +13,14 @@ import { LoggerService } from "./utils/logger";
 import { LoggingInterceptor, TimeoutInterceptor } from "./configurations/interceptors";
 import { ResponseInterceptor } from "./configurations/interceptors/response";
 import { config } from "./configurations/config/envs";
+import * as dotenv from 'dotenv';
+
+console.log('config--->', config)
+
 
 async function bootstrap() {
-  
+  dotenv.config(); // Load environment variables from .env file
+
   const logger = new LoggerService();
 
   const paths = { public: "", views: "" };
