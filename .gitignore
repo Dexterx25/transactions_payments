@@ -12,6 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+newrelic.js
+newrelic_agent
 # OS
 .DS_Store
 

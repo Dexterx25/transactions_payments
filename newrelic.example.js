@@ -9,7 +9,7 @@
     */
    exports.config = {
      app_name: ['TransactionsPayments'],
-     license_key: '16a22e2bbe0902cec6fe0c08af9353bfFFFFNRAL',
+     license_key: '123123',
      distributed_tracing: {
       enabled: true,
     },

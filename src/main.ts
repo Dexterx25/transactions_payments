@@ -19,7 +19,6 @@ import { WinstonModule } from "nest-winston";
 const winston =  require('winston');
 const newrelicFormatter = require('@newrelic/winston-enricher')(winston)
 
-console.log('config--->', config)
 
 
 async function bootstrap() {
@@ -36,29 +35,9 @@ async function bootstrap() {
     paths.public = join(src.join("/"), "public");
     paths.views = join(src.join("/"), "views");
   }
-  const expressAdapter = new ExpressAdapter()
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
-    {
-      ...expressAdapter,
-      logger: WinstonModule.createLogger({
-        instance: createLogger({
-          level: 'info',
-          format: winston.format.combine(
-            winston.format.label({label: 'test'}),
-            winston.format.colorize({ all: true }),
-            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-            newrelicFormatter(),
-            winston.format.printf(({ level, timestamp, message }) => {
-              console.log('prinf')
-                return `${timestamp} [${level}] - ${message}`;
-            })
-        ),
-        transports: [new winston.transports.Console()],
-        }),
-      }),
-    }
-    // new ExpressAdapter()
+    new ExpressAdapter()
   );
   app.useStaticAssets(join(__dirname.replace('dist', 'src'), 'public'));
   app.setBaseViewsDir(join(__dirname.replace('dist', 'src'), 'assets'));
@@ -66,7 +45,21 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(
-    new LoggingInterceptor(logger),
+    new LoggingInterceptor(WinstonModule.createLogger({
+      instance:  createLogger({
+        level: 'info',
+        format: winston.format.combine(
+          newrelicFormatter(),
+          winston.format.label({label: 'test'}),
+          winston.format.colorize({ all: true }),
+          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+          winston.format.printf(({ level, timestamp, message, ...info }) => {
+              return `${timestamp} [${level}] - ${message} - ${info.context}`;
+          })
+      ),
+      transports: [new winston.transports.Console()],
+      }),
+    })),
     new ResponseInterceptor(),
     new TimeoutInterceptor(),
   );
