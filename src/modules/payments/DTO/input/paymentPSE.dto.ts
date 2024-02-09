@@ -126,8 +126,8 @@ export enum method_exc {
 
     @IsNotEmpty()
     @ApiProperty({
-      type: String,
-      example: 'taxing',
+      type: Number,
+      example: '10',
       nullable: false,
       required: true,
       description: 'tax customer that wanna make transaction'
@@ -136,8 +136,8 @@ export enum method_exc {
 
     @IsNotEmpty()
     @ApiProperty({
-      type: String,
-      example: 'taxBase',
+      type: Number,
+      example: '10',
       nullable: false,
       required: true,
       description: 'taxBase customer that wanna make transaction'
@@ -177,8 +177,8 @@ export enum method_exc {
 
     @IsNotEmpty()
     @ApiProperty({
-      type: String,
-      example: 'typePerson',
+      type: Number,
+      example: '1',
       nullable: false,
       required: true,
       description: 'typePerson customer that wanna make transaction'
@@ -225,4 +225,11 @@ export enum method_exc {
       description: 'extra1 customer that wanna make transaction'
     })
     extra1!: number
+  }
+
+
+  export class QueryDtoPayment {
+    @IsNotEmpty()
+    typeOriginTransaction!: string;
+
   }

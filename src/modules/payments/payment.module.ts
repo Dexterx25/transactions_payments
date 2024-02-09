@@ -17,5 +17,10 @@ export class PaymentModule implements NestModule {
       consumer
       .apply(EpaycoTokenInitialization)
       .forRoutes({path: `${process.env.URL_SELFT_API}/payments`, method: RequestMethod.ALL})
+
+      consumer
+      .apply(EpaycoTokenInitialization)
+      .forRoutes({path: `${process.env.URL_SELFT_API}/payments/process`, method: RequestMethod.ALL})
+
     }
   }

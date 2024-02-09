@@ -15,6 +15,7 @@ export interface IFormatExceptionMessage {
   statusCode?: number;
   message?: string;
   error?: boolean;
+  details?: string[]
 }
 
 export class ExceptionsService {
@@ -54,7 +55,6 @@ const managerErrorsByCode = {
 }
 export class HandleErrorservice {
   handleError(error: IFormatExceptionMessage) {
-    console.log('error--->', error)
     if((config.environment !== 'dev' && error.statusCode === EnumErrorCodes.DEFAULT_ERROR) || !error?.message) {
       managerErrorsByCode[EnumErrorCodes.DEFAULT_ERROR](error)
     }
