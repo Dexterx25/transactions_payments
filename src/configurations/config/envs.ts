@@ -19,6 +19,7 @@ const config = {
     url_selft_api: process.env.URL_SELFT_API,
     environment: ENVIRONMENT.configEnvironment,
     name_app: process.env.NAME_APP,
+    type_db: process.env.TYPE_DB || 'mongodb',
     swagger: {
         user: process.env.SWAGGER_USER,
         password: process.env.SWAGGER_PASS,

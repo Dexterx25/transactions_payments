@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 require('newrelic')
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";

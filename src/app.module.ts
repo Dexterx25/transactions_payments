@@ -7,6 +7,8 @@ import { ImplementationsModules } from "./dataAccess/implementations/implementat
 import { ExceptionsModule } from "./configurations/exceptions";
 
 import * as dotenv from 'dotenv';
+import { UserModule } from "./modules/users/users.module";
+import { AuthModule } from "./modules/auth/auth.module";
 dotenv.config();
 
 
@@ -15,10 +17,12 @@ dotenv.config();
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    DatabaseModule,
     PaymentModule,
+    UserModule,
+    AuthModule,
     ImplementationsModules,
     ExceptionsModule,
+    DatabaseModule,
   ],
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 //import { RedisModule } from '../redis';
 
 @Module({
-  imports: [ ConfigModule],
+  imports: [ConfigModule],
   providers: [JWTService],
   exports: [JWTService],
 })
