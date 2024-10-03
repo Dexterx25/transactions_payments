@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Passwords } from 'src/dataAccess/databases/postgresql/entities';
+import { Passwords } from 'src/dataAccess/databases/mongodb/entities';
 import { MongoRepository } from 'typeorm';
 import { RepositoryAbs } from '../abstractRepositoryMethdos';
 

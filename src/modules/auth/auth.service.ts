@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { AuthRepository } from "src/dataAccess/databases/repositories";
-import { Passwords } from "src/dataAccess/databases/postgresql/entities";
+import { Passwords } from "src/dataAccess/databases/mongodb/entities";
 import { JWTService } from "src/configurations/jwt";
 import { EncryptPassword } from "src/utils/encryptors";
 import { PasswordsRepository } from "src/dataAccess/databases/repositories/userGroupsRepositories/password.repository";
-import { IUser } from "src/dataAccess/databases/postgresql/entities";
+import { IUser } from "src/dataAccess/databases/mongodb/entities";
 interface IUserToSignToken extends IUser {
      password: string
 }

@@ -19,9 +19,8 @@ export interface IUser {
 
 @Entity(`${config.name_app}_users`)
 export class User extends Timestamps {
-
   @ObjectIdColumn()
-  user_id!: ObjectId;
+  user_id!: ObjectId; 
 
   @Column({ length: 100 })
   names!: string;
@@ -32,9 +31,9 @@ export class User extends Timestamps {
   @Column({ length: 200 })
   nikname!: string;
   
-  @OneToOne(_type => Auth, auth => auth.user_id)
-  auths!: Auth
-
+  @OneToOne(() => Auth, auth => auth.user)
+  auths!: Auth;
+  
   @OneToMany(_type => Passwords, passwords => passwords.user_id)
   password!: Passwords[]
   

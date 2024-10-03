@@ -13,7 +13,10 @@ export class Auth extends Timestamps {
   @Column({ type: "timestamp", select: false })
   expiration_date?: string;
 
-  @OneToOne(_type => User, user => user.user_id)
-  user_id!: User;
+  @Column({ type: "varchar" }) 
+  user_id!: ObjectId;
+ 
+   @OneToOne(() => User, user => user.auths)
+   user!: User;
 
 }

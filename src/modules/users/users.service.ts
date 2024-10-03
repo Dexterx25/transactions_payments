@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { UserRepository } from "src/dataAccess/databases/repositories";
 import { UserRegisterDTO } from "./DTO/input/user.dto";
-import { User } from "src/dataAccess/databases/postgresql/entities";
+import { User } from "src/dataAccess/databases/mongodb/entities";
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,11 @@ export class UserService {
       nikname,
       surnames
     )
+  };
+  public async getUser(user_id: string): Promise<any>{
+    const objectId = new ObjectId(user_id);
+    const data = await this.userRepository.findOneData(objectId)
+    return data
   };
 };
 

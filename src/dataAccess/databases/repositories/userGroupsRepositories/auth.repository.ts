@@ -1,7 +1,7 @@
-//import { Auth } from "src/dataAccess/databases/postgresql/entities";
+//import { Auth } from "src/dataAccess/databases/mongodb/entities";
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Auth } from 'src/dataAccess/databases/postgresql/entities';
+import { Auth } from 'src/dataAccess/databases/mongodb/entities';
 import { MongoRepository } from 'typeorm';
 import { RepositoryAbs } from '../abstractRepositoryMethdos';
 import { v4 as uuidv4 } from 'uuid';

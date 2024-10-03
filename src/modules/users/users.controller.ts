@@ -1,10 +1,10 @@
-import { Controller, Post, Body} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param} from '@nestjs/common';
 import {  ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserService } from './users.service';
 import { config } from 'src/configurations/config/envs';
 import { UserRegisterDTO } from './DTO/input/user.dto';
 import { AuthService } from '../auth/auth.service';
-import { Passwords, User } from 'src/dataAccess/databases/postgresql/entities';
+import { Passwords, User } from 'src/dataAccess/databases/mongodb/entities';
 @ApiTags("users")
 @Controller(`${config.url_selft_api}`)
 export class UserController {
@@ -37,6 +37,18 @@ export class UserController {
 
     })
     return {access_token: dataAuth.access_token}
+  };
+
+  @Get('users/:user_id')
+  @ApiOperation({
+    summary: 'Con este endpoint traes la relacion de auth con user',
+    description: 'prueba de traer data de auth con user'
+  })
+ async getUserAuth(
+  @Param('user_id') user_id: string
+ ) {
+    const dataUser: User = await this.userService.getUser(user_id)
+    return dataUser
   };
 
 };
